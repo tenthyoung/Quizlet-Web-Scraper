@@ -1,0 +1,24 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">
+      Quizlet Web Scraper
+    </h1>
+    <p class="subtitle">
+      My first website with <strong>Bulma</strong>!
+    </p>
+    <ul>
+      {{#each results}}
+      <li>
+        <p><span class="label">Id:{{this.id}}</span> </p>
+        <p><span class="label">Front Side:</span> {{this.frontSide}}</p>
+        <p><span class="label">Back Side:</span> {{this.backSide}}</p>
+
+        <button data-id="{{this.id}}" class="delquote">Delete</button>
+
+        <a href="/{{this.id}}">Update this quote</a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+
+</section>
