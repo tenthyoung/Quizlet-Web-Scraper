@@ -1,4 +1,3 @@
 module.exports = {
-    Article: require('./Article'),
-    Note: require('./Note')
+    Flashcard: require('./Flashcard.js'),
 };
