@@ -1,3 +1,30 @@
+
+$(document).ready(function() {
+
+    $("#quizlet-scrape-form").on("submit", function(event) {
+      event.preventDefault();
+  
+      let scrapeInfo = {
+        queryURL: $(this).find("#queryURL").val(),
+      };
+
+      console.log(scrapeInfo.queryURL)
+  
+      $.ajax({
+        method: "POST",
+        url: "/scrape",
+        data: scrapeInfo
+      }).then(function(data) {
+        location.reload();
+      });
+  
+    });
+});
+
+
+
+
+// Bulma Navbar Init
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get all "navbar-burger" elements
@@ -21,5 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     }
-  
-  });
+});
+
+

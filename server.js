@@ -17,7 +17,7 @@ app.use(express.static("views"));  // you might not need this
 app.use(express.static("public")); // you might not need this
 
 // The port that it will be deployed on heroku servers or our own server
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 // URI is a format that helps us define connections to mongo databases
 // we need two options, one for mLab and one for local testing
@@ -25,15 +25,15 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/quizletwebscra
 var db = require("./models");
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, autoIndex: false }); // if you don't set autoIndex to false, it can slow down your deployed app
 
-var card = { frontSide: "What is the capitol of the USA?", backSide: "DC" };
+// var card = { frontSide: "What is the capitol of the USA?", backSide: "DC" };
 
-db.Flashcard.create(card)
-.then(function(dbcard) {
-    console.log(dbcard);
-})
-.catch(function(err) {
-    console.log(err);
-});
+// db.Flashcard.create(card)
+// .then(function(dbcard) {
+//     console.log(dbcard);
+// })
+// .catch(function(err) {
+//     console.log(err);
+// });
 
 // For handlebars
 var exphbs = require('express-handlebars');
@@ -42,10 +42,7 @@ app.set('view engine', 'handlebars');
 
 
 app.get('/', function (req, res) {
-    console.log("\n***********************************\n" +
-        "Grabbing every thread name and link\n" +
-        "from reddit's webdev board:" +
-        "\n***********************************\n");
+
     axios.get("https://quizlet.com/369310355/mgt-112-quiz-2-flash-cards/").then(function (response) {
         const $ = cheerio.load(response.data);
 
@@ -64,6 +61,16 @@ app.get('/', function (req, res) {
         });
         res.render('index',{results:results});
     });
+});
+
+app.post('/scrape', (req,res) => {
+    console.log('scrape scrape');
+    console.log(req.body.queryURL);
+});
+
+
+app.get('/cards/:id', function (req, res) {
+
 });
 
 app.listen(PORT, function () {

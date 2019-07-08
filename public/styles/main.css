@@ -24,6 +24,7 @@ body {
     padding: 10px 16px;
 }
 
+
 .label {
     color: lightgray;
 }
@@ -51,3 +52,10 @@ body {
     -ms-filter: "FlipH";
 }
 
+#saveAllBtn {
+    display: inline;
+}
+
+#submitBtn {
+    display: inline;
+}
