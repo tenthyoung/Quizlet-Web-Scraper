@@ -5,7 +5,7 @@ $(document).ready(function() {
       event.preventDefault();
   
       let scrapeInfo = {
-        queryURL: $(this).find("#queryURL").val(),
+        queryURL: $(this).find("#queryURL").val().trim(),
       };
 
       console.log(scrapeInfo.queryURL)
@@ -15,7 +15,8 @@ $(document).ready(function() {
         url: "/scrape",
         data: scrapeInfo
       }).then(function(data) {
-        location.reload();
+        console.log(data)
+        
       });
   
     });

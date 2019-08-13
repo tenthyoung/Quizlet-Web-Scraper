@@ -60,12 +60,34 @@ app.get('/', function (req, res) {
             });
         });
         res.render('index',{results:results});
-    });
+        });
+        
 });
 
 app.post('/scrape', (req,res) => {
     console.log('scrape scrape');
     console.log(req.body.queryURL);
+    axios.get(req.body.queryURL).then(function (response) {
+        console.log('beepboop');
+        const $ = cheerio.load(response.data);
+
+        let results = [];
+
+        $(".SetPageTerms-termsList .SetPageTerms-term .SetPageTerm-content").each(function (i, element) {
+            let frontSide = $(element).find('.SetPageTerm-wordText').text();
+
+            let backSide = $(element).find('.SetPageTerm-definitionText').text();
+
+            results.push({
+                id: i,
+                frontSide: frontSide,
+                backSide: backSide
+            });
+            console.log(results);
+        });
+        //res.render('index',{result:results});
+        res.json(results);
+    });
 });
 
 
